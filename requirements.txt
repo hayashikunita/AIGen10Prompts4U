@@ -1,0 +1,7 @@
+# Python依存パッケージ
+
+# OpenAI API (オプション - AI生成機能を使う場合のみ必要)
+openai>=1.0.0
+
+# 環境変数管理
+python-dotenv>=1.0.0
