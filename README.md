@@ -28,8 +28,13 @@ AIGen10Prompts4Uは、様々なシーンで使用できるシステムプロン�
 | email | メール返信用 | 10個 | email.json |
 | negotiation | 単価交渉用 | 10個 | negotiation.json |
 | meeting | 会議カンペ作成用 | 10個 | meeting.json |
+| consultant | コンサルタント用 | 10個 | consultant.json |
+| medical | 医療用 | 10個 | medical.json |
+| investment | 投資用 | 10個 | investment.json |
+| dating | 恋愛・デート用 | 10個 | dating.json |
+| job_interview | 面接・転職対策用 | 10個 | job_interview.json |
 
-**合計9カテゴリ、340個のプロンプト**
+**合計14カテゴリ、390個のプロンプト**
 
 ## インストール
 
@@ -147,7 +152,12 @@ AIGen10Prompts4U/
 │   ├── summary.json        # 要約用プロンプト(10個)
 │   ├── email.json          # メール返信用プロンプト(10個)
 │   ├── negotiation.json    # 単価交渉用プロンプト(10個)
-│   └── meeting.json        # 会議カンペ作成用プロンプト(10個)
+│   ├── meeting.json        # 会議カンペ作成用プロンプト(10個)
+│   ├── consultant.json     # コンサルタント用プロンプト(10個)
+│   ├── medical.json        # 医療用プロンプト(10個)
+│   ├── investment.json     # 投資用プロンプト(10個)
+│   ├── dating.json         # 恋愛・デート用プロンプト(10個)
+│   └── job_interview.json  # 面接・転職対策用プロンプト(10個)
 ├── output/                  # 生成結果の出力先
 ├── requirements.txt         # 依存パッケージ
 ├── .env.example            # 環境変数のテンプレート
@@ -205,6 +215,14 @@ Hayashi Work
 
 ## 更新履歴
 
+- 2025-11-11 v1.3: 面接・転職対策カテゴリ追加
+  - **新規カテゴリ追加**: job_interview(10個)
+  - **合計**: 14カテゴリ、390個のプロンプト
+
+- 2025-11-11 v1.2: さらなるカテゴリ拡充
+  - **新規カテゴリ追加**: consultant(10個), medical(10個), investment(10個), dating(10個)
+  - **合計**: 13カテゴリ、380個のプロンプト
+  
 - 2025-11-11 v1.1: カテゴリ大幅拡充
   - **新規カテゴリ追加**: engineer(100個), email(10個), negotiation(10個), meeting(10個)
   - **既存カテゴリ拡充**: idea.jsonを100個に拡充
