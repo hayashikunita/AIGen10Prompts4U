@@ -60,7 +60,12 @@ class PromptGenerator:
             "medical": "medical.json",
             "investment": "investment.json",
             "dating": "dating.json",
-            "job_interview": "job_interview.json"
+            "job_interview": "job_interview.json",
+            "education": "education.json",
+            "legal": "legal.json",
+            "sns_content": "sns_content.json",
+            "startup": "startup.json",
+            "programmer": "programmer.json"
         }
         
         if category not in file_map:

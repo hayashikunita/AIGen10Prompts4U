@@ -21,7 +21,7 @@ AIGen10Prompts4Uは、様々なシーンで使用できるシステムプロン�
 |---------|------|-------------|---------|
 | industry | 業界別プロンプト | 100個 | industry.json |
 | idea | アイデア創出用 | 100個 | idea.json |
-| engineer | エンジニア用(全工程対応) | 100個 | engineer.json |
+| engineer | エンジニア用(全工程対応) | 150個 | engineer.json |
 | management | マネジメント用 | 10個 | management.json |
 | sales | 営業用 | 10個 | sales.json |
 | summary | 要約用 | 10個 | summary.json |
@@ -33,8 +33,13 @@ AIGen10Prompts4Uは、様々なシーンで使用できるシステムプロン�
 | investment | 投資用 | 10個 | investment.json |
 | dating | 恋愛・デート用 | 10個 | dating.json |
 | job_interview | 面接・転職対策用 | 10個 | job_interview.json |
+| education | 教育・学習支援用 | 10個 | education.json |
+| legal | 法律・契約書用 | 10個 | legal.json |
+| sns_content | SNS・コンテンツ作成用 | 10個 | sns_content.json |
+| startup | 起業・スタートアップ用 | 10個 | startup.json |
+| programmer | プログラマー実践用 | 50個 | programmer.json |
 
-**合計14カテゴリ、390個のプロンプト**
+**合計19カテゴリ、530個のプロンプト**
 
 ## インストール
 
@@ -146,7 +151,7 @@ AIGen10Prompts4U/
 ├── prompts_data/
 │   ├── industry.json        # 業界別プロンプト(100個)
 │   ├── idea.json           # アイデア用プロンプト(100個)
-│   ├── engineer.json       # エンジニア用プロンプト(100個)
+│   ├── engineer.json       # エンジニア用プロンプト(150個)
 │   ├── management.json     # マネジメント用プロンプト(10個)
 │   ├── sales.json          # 営業用プロンプト(10個)
 │   ├── summary.json        # 要約用プロンプト(10個)
@@ -157,7 +162,11 @@ AIGen10Prompts4U/
 │   ├── medical.json        # 医療用プロンプト(10個)
 │   ├── investment.json     # 投資用プロンプト(10個)
 │   ├── dating.json         # 恋愛・デート用プロンプト(10個)
-│   └── job_interview.json  # 面接・転職対策用プロンプト(10個)
+│   ├── job_interview.json  # 面接・転職対策用プロンプト(10個)
+│   ├── education.json      # 教育・学習支援用プロンプト(10個)
+│   ├── legal.json          # 法律・契約書用プロンプト(10個)
+│   ├── sns_content.json    # SNS・コンテンツ作成用プロンプト(10個)
+│   └── startup.json        # 起業・スタートアップ用プロンプト(10個)
 ├── output/                  # 生成結果の出力先
 ├── requirements.txt         # 依存パッケージ
 ├── .env.example            # 環境変数のテンプレート
@@ -214,6 +223,18 @@ MIT License
 Hayashi Work
 
 ## 更新履歴
+
+- 2025-11-13 v1.6: プログラマー実践カテゴリ追加
+  - **新規カテゴリ追加**: programmer(50個) - アルゴリズム、デバッグ、コードレビュー、リファクタリング、デザインパターン、セキュアコーディング、フロントエンド/バックエンド実装など、プログラミング実務に特化した50個のプロンプト
+  - **合計**: 19カテゴリ、530個のプロンプト
+
+- 2025-11-13 v1.5: エンジニアカテゴリ大幅拡充
+  - **エンジニアカテゴリ拡充**: 100個→150個に拡充（TypeScript、React、Next.js、各種言語、アーキテクチャパターン、データベース、IaC、監視、テストツール等を追加）
+  - **合計**: 18カテゴリ、480個のプロンプト
+
+- 2025-11-12 v1.4: 教育・法律・SNS・起業カテゴリ追加
+  - **新規カテゴリ追加**: education(10個), legal(10個), sns_content(10個), startup(10個)
+  - **合計**: 18カテゴリ、430個のプロンプト
 
 - 2025-11-11 v1.3: 面接・転職対策カテゴリ追加
   - **新規カテゴリ追加**: job_interview(10個)
