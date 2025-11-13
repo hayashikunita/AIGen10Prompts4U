@@ -38,9 +38,11 @@ AIGen10Prompts4Uは、様々なシーンで使用できるシステムプロン�
 | sns_content | SNS・コンテンツ作成用 | 10個 | sns_content.json |
 | startup | 起業・スタートアップ用 | 10個 | startup.json |
 | programmer | プログラマー実践用 | 50個 | programmer.json |
-| python_engineer | Pythonエンジニア専門用 | 100個 | python_engineer.json |
+| python_engineer | Pythonエンジニア専門用 | 150個 | python_engineer.json |
+| ai_engineer | AIエンジニア専門用 | 50個 | ai_engineer.json |
+| chatgpt_api | ChatGPT API活用専門用 | 50個 | chatgpt_api.json |
 
-**合計20カテゴリ、630個のプロンプト**
+**合計22カテゴリ、780個のプロンプト**
 
 ## インストール
 
@@ -224,6 +226,18 @@ MIT License
 Hayashi Work
 
 ## 更新履歴
+
+- 2025-11-13 v1.11: ChatGPT API活用専門カテゴリ追加
+  - **新規カテゴリ追加**: chatgpt_api(50個) - API基本統合、プロンプトエンジニアリング、パラメータ最適化、コスト管理、ストリーミング、会話履歴管理、Function Calling、JSON Mode、エラーハンドリング、レート制限対策、セキュリティ、プロンプトインジェクション対策、RAG統合、Assistant API、Vision API、多言語対応、要約生成、分類タスク、コンテンツ生成、カスタマーサポート自動化、テスト自動化、監視・アラート、スケーラビリティ、エンタープライズ統合など、ChatGPT API活用の全領域をカバーする50個のプロンプト
+  - **合計**: 22カテゴリ、780個のプロンプト
+
+- 2025-11-13 v1.10: AIエンジニア専門カテゴリ追加
+  - **新規カテゴリ追加**: ai_engineer(50個) - 機械学習プロジェクト設計、データ前処理・特徴量エンジニアリング、教師あり/なし学習、深層学習(CNN/RNN/Transformer)、BERT/GPT/LLM、RAG、画像認識(物体検出/セグメンテーション/顔認識)、音声認識/合成、強化学習、NLP、マルチモーダル、XAI、MLOps、モデル監視など、AI開発の全領域をカバーする50個のプロンプト
+  - **合計**: 21カテゴリ、730個のプロンプト
+
+- 2025-11-13 v1.9: Pythonエンジニアカテゴリ最終拡充
+  - **Pythonエンジニアカテゴリ最終拡充**: 100個→150個に拡充（NumPy Advanced、pandas MultiIndex、asyncpg/Motor/redis-py/Elasticsearch等データベースドライバ、Pillow/OpenCV/scikit-image画像処理、PyTorch/TensorFlow/Transformers機械学習、spaCy/NLTK/Gensim NLP、Pulumi/Ansible/K8s自動化、Cryptography/JWT/bcrypt セキュリティ、Descriptor/Metaclass/GIL等Python内部機構を追加）
+  - **合計**: 20カテゴリ、680個のプロンプト
 
 - 2025-11-13 v1.8: Pythonエンジニアカテゴリ大幅拡充
   - **Pythonエンジニアカテゴリ拡充**: 50個→100個に拡充（Flask/Django詳細、GraphQL/gRPC、Pytest/Hypothesis、Polars/DuckDB/Arrow、Dask/Ray、MLflow、Prefect/Airflow、Typer/Rich/Textual、Playwright/Locust、Poetry/Ruff/uv、OpenTelemetry、LangChain/Instructor、Cython/PyO3等を追加）

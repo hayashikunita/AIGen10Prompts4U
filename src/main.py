@@ -66,7 +66,9 @@ class PromptGenerator:
             "sns_content": "sns_content.json",
             "startup": "startup.json",
             "programmer": "programmer.json",
-            "python_engineer": "python_engineer.json"
+            "python_engineer": "python_engineer.json",
+            "ai_engineer": "ai_engineer.json",
+            "chatgpt_api": "chatgpt_api.json"
         }
         
         if category not in file_map:
