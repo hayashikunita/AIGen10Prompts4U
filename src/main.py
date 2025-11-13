@@ -65,7 +65,8 @@ class PromptGenerator:
             "legal": "legal.json",
             "sns_content": "sns_content.json",
             "startup": "startup.json",
-            "programmer": "programmer.json"
+            "programmer": "programmer.json",
+            "python_engineer": "python_engineer.json"
         }
         
         if category not in file_map:

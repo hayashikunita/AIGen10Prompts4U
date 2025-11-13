@@ -38,8 +38,9 @@ AIGen10Prompts4Uは、様々なシーンで使用できるシステムプロン�
 | sns_content | SNS・コンテンツ作成用 | 10個 | sns_content.json |
 | startup | 起業・スタートアップ用 | 10個 | startup.json |
 | programmer | プログラマー実践用 | 50個 | programmer.json |
+| python_engineer | Pythonエンジニア専門用 | 100個 | python_engineer.json |
 
-**合計19カテゴリ、530個のプロンプト**
+**合計20カテゴリ、630個のプロンプト**
 
 ## インストール
 
@@ -223,6 +224,14 @@ MIT License
 Hayashi Work
 
 ## 更新履歴
+
+- 2025-11-13 v1.8: Pythonエンジニアカテゴリ大幅拡充
+  - **Pythonエンジニアカテゴリ拡充**: 50個→100個に拡充（Flask/Django詳細、GraphQL/gRPC、Pytest/Hypothesis、Polars/DuckDB/Arrow、Dask/Ray、MLflow、Prefect/Airflow、Typer/Rich/Textual、Playwright/Locust、Poetry/Ruff/uv、OpenTelemetry、LangChain/Instructor、Cython/PyO3等を追加）
+  - **合計**: 20カテゴリ、630個のプロンプト
+
+- 2025-11-13 v1.7: Pythonエンジニア専門カテゴリ追加
+  - **新規カテゴリ追加**: python_engineer(50個) - パフォーマンスチューニング、型ヒント、asyncio、pandas/NumPy最適化、FastAPI/Django、pytest、Poetry、標準ライブラリ活用など、Python特有の技術に特化した50個のプロンプト
+  - **合計**: 20カテゴリ、580個のプロンプト
 
 - 2025-11-13 v1.6: プログラマー実践カテゴリ追加
   - **新規カテゴリ追加**: programmer(50個) - アルゴリズム、デバッグ、コードレビュー、リファクタリング、デザインパターン、セキュアコーディング、フロントエンド/バックエンド実装など、プログラミング実務に特化した50個のプロンプト
