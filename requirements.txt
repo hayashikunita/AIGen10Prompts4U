@@ -1,7 +1,15 @@
 # Python依存パッケージ
 
 # OpenAI API (オプション - AI生成機能を使う場合のみ必要)
-openai>=1.0.0
+openai>=1.3.0
+streamlit>=1.28.0
+python-dotenv>=1.0.0
+
+# データ処理
+pandas>=2.0.0
+openpyxl>=3.1.0  # Excelファイル読み込み用
+pdfplumber>=0.9.0  # PDFファイル読み込み用
+python-docx>=0.8.11  # Wordファイル読み込み用
 
 # 環境変数管理
 python-dotenv>=1.0.0
