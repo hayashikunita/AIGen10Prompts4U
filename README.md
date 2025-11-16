@@ -2,6 +2,12 @@
 
 システムプロンプトを自動生成するアプリケーション
 
+https://github.com/user-attachments/assets/8fe14fb2-8268-4de6-ac6b-7386e3b8a4ee
+
+
+https://github.com/user-attachments/assets/adad464c-aea4-4153-b98c-5d1bc0361736
+
+
 ## 概要
 
 AIGen10Prompts4Uは、様々なシーンで使用できるシステムプロンプトを簡単に生成できるツールです。
