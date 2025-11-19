@@ -2,10 +2,8 @@
 
 モダンなReact + TypeScript + FastAPIで構築されたシステムプロンプト管理・AI対話アプリケーション
 
-https://github.com/user-attachments/assets/8fe14fb2-8268-4de6-ac6b-7386e3b8a4ee
 
-
-https://github.com/user-attachments/assets/adad464c-aea4-4153-b98c-5d1bc0361736
+https://github.com/user-attachments/assets/155dce51-5a10-4952-b5f3-f2dede300dec
 
 
 ## 概要
