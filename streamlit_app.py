@@ -16,10 +16,81 @@ load_dotenv()
 
 # ページ設定
 st.set_page_config(
-    page_title="AIGen10Prompts4U - システムプロンプト生成",
+    page_title="AIGenPrompts4U - システムプロンプト生成",
     page_icon="🤖",
     layout="wide"
 )
+
+# カスタムCSSでUIを改善
+st.markdown("""
+<style>
+    /* ユーザーメッセージ - 見やすい青系 */
+    [data-testid="stChatMessageContent"] {
+        color: inherit;
+    }
+    
+    div[data-testid="stChatMessage"][data-testid*="user"] {
+        background-color: #0084ff !important;
+    }
+    
+    div[data-testid="stChatMessage"][data-testid*="user"] [data-testid="stMarkdownContainer"],
+    div[data-testid="stChatMessage"][data-testid*="user"] p,
+    div[data-testid="stChatMessage"][data-testid*="user"] div,
+    div[data-testid="stChatMessage"][data-testid*="user"] span,
+    div[data-testid="stChatMessage"][data-testid*="user"] li {
+        color: #ffffff !important;
+    }
+    
+    /* アシスタントメッセージ */
+    div[data-testid="stChatMessage"][data-testid*="assistant"] {
+        background-color: #f5f5f5 !important;
+    }
+    
+    div[data-testid="stChatMessage"][data-testid*="assistant"] [data-testid="stMarkdownContainer"],
+    div[data-testid="stChatMessage"][data-testid*="assistant"] p,
+    div[data-testid="stChatMessage"][data-testid*="assistant"] div,
+    div[data-testid="stChatMessage"][data-testid*="assistant"] span,
+    div[data-testid="stChatMessage"][data-testid*="assistant"] li {
+        color: #000000 !important;
+    }
+    
+    /* チャットメッセージの角丸 */
+    div[data-testid="stChatMessage"] {
+        border-radius: 12px !important;
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* コードブロック */
+    code {
+        color: #000000 !important;
+        background-color: #f1f3f5 !important;
+    }
+    
+    pre {
+        background-color: #f8f9fa !important;
+    }
+    
+    /* ボタンのホバーエフェクト */
+    .stButton button {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+    }
+    
+    .stButton button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* タイトル */
+    h1 {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # チャット履歴保存ディレクトリ
 CHAT_HISTORY_DIR = Path("chat_history")
@@ -304,7 +375,7 @@ class PromptGenerator:
 
 # Streamlitアプリ
 def main():
-    st.title("🤖 AIGen10Prompts4U")
+    st.title("🤖 AIGenPrompts4U")
     st.markdown("### システムプロンプト生成アプリ")
     st.markdown("---")
     
@@ -334,6 +405,16 @@ def main():
         
         # モードが変更された場合のみ更新
         if mode != st.session_state.mode:
+            # モード切替時に現在の会話を自動保存
+            if mode == "generator" and len(st.session_state.messages) > 0:
+                auto_title = f"会話_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                save_chat_history(
+                    auto_title,
+                    st.session_state.messages,
+                    st.session_state.selected_prompt
+                )
+                st.toast(f"✅ 会話を自動保存しました: {auto_title}", icon="💾")
+            
             st.session_state.mode = mode
         
         st.markdown("---")
@@ -379,6 +460,16 @@ def main():
 
 def switch_to_chat(prompt):
     """チャットモードに切り替える"""
+    # 現在の会話がある場合は自動保存
+    if len(st.session_state.messages) > 0:
+        auto_title = f"会話_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        save_chat_history(
+            auto_title,
+            st.session_state.messages,
+            st.session_state.selected_prompt
+        )
+        st.toast(f"✅ 前の会話を自動保存しました: {auto_title}", icon="💾")
+    
     st.session_state.selected_prompt = prompt
     st.session_state.messages = []
     st.session_state.mode = "chatbot"
@@ -464,6 +555,17 @@ def show_chatbot_mode(generator):
     
     with col2:
         if st.button("🆕 新しい会話", use_container_width=True):
+            # 現在の会話を自動保存してから新しい会話を開始
+            if len(st.session_state.messages) > 0:
+                # 自動保存
+                auto_title = f"会話_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                save_chat_history(
+                    auto_title,
+                    st.session_state.messages,
+                    st.session_state.selected_prompt
+                )
+                st.toast(f"✅ 前の会話を自動保存しました: {auto_title}", icon="💾")
+            
             st.session_state.messages = []
             st.session_state.selected_prompt = None
             st.rerun()
@@ -568,6 +670,16 @@ def show_chatbot_mode(generator):
                 if st.button("✅ このプロンプトを使用", type="primary"):
                     selected_prompt = next((p for p in prompts if p['title'] == selected_title), None)
                     if selected_prompt:
+                        # 現在の会話がある場合は自動保存
+                        if len(st.session_state.messages) > 0:
+                            auto_title = f"会話_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                            save_chat_history(
+                                auto_title,
+                                st.session_state.messages,
+                                st.session_state.selected_prompt
+                            )
+                            st.toast(f"✅ 前の会話を自動保存しました: {auto_title}", icon="💾")
+                        
                         st.session_state.selected_prompt = selected_prompt
                         st.session_state.messages = []
                         st.session_state.show_prompt_selector = False
@@ -599,22 +711,45 @@ def show_chatbot_mode(generator):
                 st.info("なし")
     
     # チャット履歴を表示
-    for message in st.session_state.messages:
+    for idx, message in enumerate(st.session_state.messages):
         with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+            # メッセージコンテンツとコピーボタンを含むコンテナ
+            col1, col2 = st.columns([0.95, 0.05])
+            
+            with col1:
+                st.markdown(message["content"])
+            
+            with col2:
+                # コピーボタンを追加
+                if st.button("📋", key=f"copy_{idx}", help="メッセージをコピー"):
+                    st.code(message["content"], language=None)
+                    st.success("✅ コピー用テキストを表示しました")
+            
             # 添付ファイル情報を表示
             if "files" in message and message["files"]:
-                st.markdown("**📎 添付ファイル:**")
-                for file_info in message["files"]:
-                    st.markdown(f"• {file_info['name']} ({file_info['size']} bytes)")
+                with st.expander("📎 添付ファイル", expanded=False):
+                    for file_info in message["files"]:
+                        file_icon = {
+                            "pdf": "📕",
+                            "word": "📘", 
+                            "excel": "📊",
+                            "csv": "📄",
+                            "text": "📝"
+                        }.get(file_info.get("type", "text"), "📄")
+                        
+                        truncated_badge = " 🔸 切り詰め" if file_info.get("truncated", False) else ""
+                        st.markdown(f"{file_icon} **{file_info['name']}** ({file_info['size']:,} bytes){truncated_badge}")
     
-    # ファイルアップローダー
-    uploaded_files = st.file_uploader(
-        "📎 ファイルを添付（複数可）",
-        accept_multiple_files=True,
-        key="file_uploader",
-        help="PDF、Word (.docx)、Excel (.xlsx, .xls)、CSV、テキストファイル、コードなどに対応"
-    )
+    # ファイルアップローダー（より見やすく）
+    st.markdown("---")
+    with st.expander("📎 ファイルを添付（複数可）", expanded=False):
+        st.markdown("**対応形式:** PDF、Word (.docx)、Excel (.xlsx, .xls)、CSV、テキストファイル、コードなど")
+        uploaded_files = st.file_uploader(
+            "ファイルを選択",
+            accept_multiple_files=True,
+            key="file_uploader",
+            label_visibility="collapsed"
+        )
     
     # ユーザー入力
     if prompt := st.chat_input("メッセージを入力してください..."):
@@ -695,56 +830,107 @@ def show_chatbot_mode(generator):
         
         st.session_state.messages.append(user_message)
         with st.chat_message("user"):
-            st.markdown(prompt)
-            if file_info_list:
-                st.markdown("**📎 添付ファイル:**")
-                for file_info in file_info_list:
-                    st.markdown(f"• {file_info['name']} ({file_info['size']} bytes)")
+            col1, col2 = st.columns([0.95, 0.05])
+            
+            with col1:
+                st.markdown(prompt)
+                if file_info_list:
+                    with st.expander("📎 添付ファイル", expanded=False):
+                        for file_info in file_info_list:
+                            file_icon = {
+                                "pdf": "📕",
+                                "word": "📘",
+                                "excel": "📊", 
+                                "csv": "📄",
+                                "text": "📝"
+                            }.get(file_info.get("type", "text"), "📄")
+                            st.markdown(f"{file_icon} **{file_info['name']}** ({file_info['size']:,} bytes)")
+            
+            with col2:
+                # ユーザーメッセージのコピーボタン
+                if st.button("📋", key=f"copy_user_{len(st.session_state.messages)-1}", help="メッセージをコピー"):
+                    st.code(prompt, language=None)
         
         # アシスタントの応答を生成
         with st.chat_message("assistant"):
-            message_placeholder = st.empty()
-            full_response = ""
+            # コンテナを作成してコピーボタンを配置
+            response_container = st.container()
             
-            # システムプロンプトを含めてAPI呼び出し
-            messages = []
-            if st.session_state.selected_prompt:
-                messages.append({
-                    "role": "system",
-                    "content": st.session_state.selected_prompt['system_prompt']
-                })
-            
-            messages.extend([
-                {"role": m["role"], "content": m["content"]}
-                for m in st.session_state.messages
-            ])
-            
-            try:
-                stream = client.chat.completions.create(
-                    # model="chatgpt-4o-latest",
-                    model="gpt-5",
-                    messages=messages,
-                    stream=True,
-                    # temperature=0.7
-                )
+            with response_container:
+                col1, col2 = st.columns([0.95, 0.05])
                 
-                for chunk in stream:
-                    if chunk.choices[0].delta.content is not None:
-                        full_response += chunk.choices[0].delta.content
-                        message_placeholder.markdown(full_response + "▌")
+                with col1:
+                    message_placeholder = st.empty()
                 
-                message_placeholder.markdown(full_response)
+                full_response = ""
                 
-            except Exception as e:
-                full_response = f"❌ エラーが発生しました: {str(e)}"
-                message_placeholder.markdown(full_response)
-            
-            # アシスタントメッセージを追加
-            st.session_state.messages.append({"role": "assistant", "content": full_response})
+                # システムプロンプトを含めてAPI呼び出し
+                messages = []
+                if st.session_state.selected_prompt:
+                    messages.append({
+                        "role": "system",
+                        "content": st.session_state.selected_prompt['system_prompt']
+                    })
+                
+                messages.extend([
+                    {"role": m["role"], "content": m["content"]}
+                    for m in st.session_state.messages
+                ])
+                
+                try:
+                    stream = client.chat.completions.create(
+                        # model="chatgpt-4o-latest",
+                        model="gpt-5",
+                        messages=messages,
+                        stream=True,
+                        # temperature=0.7
+                    )
+                    
+                    for chunk in stream:
+                        if chunk.choices[0].delta.content is not None:
+                            full_response += chunk.choices[0].delta.content
+                            message_placeholder.markdown(full_response + "▌")
+                    
+                    message_placeholder.markdown(full_response)
+                    
+                except Exception as e:
+                    full_response = f"❌ エラーが発生しました: {str(e)}"
+                    message_placeholder.markdown(full_response)
+                
+                # レスポンス完了後、コピーボタンを表示
+                with col2:
+                    if st.button("📋", key=f"copy_assistant_{len(st.session_state.messages)}", help="メッセージをコピー"):
+                        st.code(full_response, language=None)
+                        st.success("✅ コピー用テキストを表示しました")
+                
+                # アシスタントメッセージを追加
+                st.session_state.messages.append({"role": "assistant", "content": full_response})
     
     # 初期メッセージ
     if len(st.session_state.messages) == 0:
-        st.info("💬 チャットを開始してください。左のサイドバーから「プロンプトから選択」でシステムプロンプトを設定できます。")
+        st.markdown("""
+        <div style="text-align: center; padding: 3rem; background: linear-gradient(135deg, #667eea22 0%, #764ba222 100%); border-radius: 12px; margin: 2rem 0;">
+            <h3 style="color: #667eea; margin-bottom: 1rem;">💬 チャットを開始</h3>
+            <p style="color: #6c757d; font-size: 1.1rem;">
+                左のサイドバーから<strong>「プロンプトから選択」</strong>でシステムプロンプトを設定できます<br>
+                ファイルを添付して、AIに分析させることもできます
+            </p>
+            <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <span style="background: #e7f5ff; color: #1971c2; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                    📕 PDF対応
+                </span>
+                <span style="background: #fff4e6; color: #e8590c; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                    📊 Excel対応
+                </span>
+                <span style="background: #f3f0ff; color: #7950f2; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                    📝 コード対応
+                </span>
+                <span style="background: #e3fafc; color: #0c8599; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                    🤖 GPT-5搭載
+                </span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

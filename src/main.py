@@ -1,5 +1,5 @@
 """
-AIGen10Prompts4U - システムプロンプト生成アプリケーション
+AIGenPrompts4U - システムプロンプト生成アプリケーション
 
 このアプリケーションは、様々なカテゴリのシステムプロンプトを生成します。
 - サンプルから10個をランダム抽出
@@ -136,7 +136,7 @@ class PromptGenerator:
 def main():
     """メイン処理"""
     parser = argparse.ArgumentParser(
-        description='AIGen10Prompts4U - システムプロンプト生成アプリ',
+        description='AIGenPrompts4U - システムプロンプト生成アプリ',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 使用例:
